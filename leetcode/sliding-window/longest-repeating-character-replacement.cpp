@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/longest-repeating-character-replacement/
 
+// I gave up on this one...
+
 #include <deque>
 #include <iostream>
 #include <string>
