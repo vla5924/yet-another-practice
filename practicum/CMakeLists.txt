@@ -9,3 +9,5 @@ endfunction()
 
 add_practicum("a.cpp")
 add_practicum("c.cpp")
+add_practicum("d.cpp")
+add_practicum("f.cpp")
