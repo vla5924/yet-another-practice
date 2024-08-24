@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <queue>
+#include <set>
 #include <vector>
 
 using namespace std;
@@ -23,7 +24,7 @@ class Solution {
             return 0;
         bfs.emplace(-1, -1);
         int minute = 0;
-        queue<pair<int, int>> toRot;
+        set<pair<int, int>> toRot;
         static vector<pair<int, int>> neighbors = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         while (!bfs.empty()) {
             auto [cRow, cCol] = bfs.front();
@@ -31,11 +32,11 @@ class Solution {
             if (cRow == -1) {
                 if (toRot.empty())
                     return -1;
-                while (!toRot.empty()) {
-                    auto [row, col] = toRot.front();
-                    toRot.pop();
+                for (auto [row, col] : toRot) {
                     grid[row][col] = 2;
+                    visited[row][col] = false;
                 }
+                toRot.clear();
                 minute++;
                 if (bfs.empty())
                     break;
@@ -46,14 +47,15 @@ class Solution {
             for (const auto &[dRow, dCol] : neighbors) {
                 int nRow = cRow + dRow;
                 int nCol = cCol + dCol;
-                if (nRow < 0 || nCol < 0 || nRow >= rows || nCol >= cols)
+                if (nRow < 0 || nCol < 0 || nRow >= rows || nCol >= cols || visited[nRow][nCol])
                     continue;
-                visited[nRow][nCol] = true;
                 int stat = grid[nRow][nCol];
                 if (stat == 1) {
                     bfs.emplace(nRow, nCol);
-                } else if (stat == 2)
+                    visited[nRow][nCol] = true;
+                } else if (stat == 2) {
                     willRot = true;
+                }
             }
             if (willRot) {
                 toRot.emplace(cRow, cCol);
@@ -66,9 +68,9 @@ class Solution {
 };
 
 int main() {
-    // vector<vector<int>> grid = {{2, 1, 1}, {1, 1, 0}, {0, 1, 1}};
+    vector<vector<int>> grid = {{2, 1, 1}, {1, 1, 0}, {0, 1, 1}};
     // vector<vector<int>> grid = {{2, 1, 1}, {0, 1, 1}, {1, 0, 1}};
-    vector<vector<int>> grid = {{0, 2}};
+    // vector<vector<int>> grid = {{0, 2}};
     cout << Solution().orangesRotting(grid);
     return 0;
 }
