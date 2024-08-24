@@ -28,3 +28,7 @@ Competitive Programmer's Handbook: https://github.com/pllk/cphb/blob/master/book
 * https://www.hackerrank.com/dashboard
 * https://www.topcoder.com
 * http://codeforces.com
+
+Описания алгоритмов и структур данных по разделам:
+* https://ru.algorithmica.org/cs/
+* https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/
